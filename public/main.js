@@ -229,7 +229,7 @@ function moveUp(){
 
 function moveDown(){
     console.log('mover pa abajo')
-    const redondeo=(playerPosition.positiony+areaSize).toFixed(2)
+    const redondeo=(playerPosition.positiony+areaSize).toFixed(3)
     
     if(redondeo<=canvasSize){
         playerPosition.positiony+=areaSize
