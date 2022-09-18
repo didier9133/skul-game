@@ -229,9 +229,9 @@ function moveUp(){
 
 function moveDown(){
     console.log('mover pa abajo')
-    const redondeo=(playerPosition.positiony+areaSize).toFixed(3)
-    
-    if(redondeo<=canvasSize){
+    const redondeo=Number((playerPosition.positiony+areaSize).toFixed(2))
+    console.log({redondeo,canvasSize})
+    if(redondeo<=Number(canvasSize.toFixed())){
         playerPosition.positiony+=areaSize
         starGame()
         
