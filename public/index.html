@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/tailwind.css">
+    <script src="https://kit.fontawesome.com/8226f8213e.js" crossorigin="anonymous"></script>
+    <title>Document</title>
+    <style>
+
+      *{
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+      }
+
+      body {
+        background-color: indigo;
+        color: #fff;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+      }
+
+      .game-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        width: 100%;
+        height: 100vh;
+      }
+
+      #nickname{
+        writing-mode:vertical-lr ;
+      
+      }
+
+      canvas {
+        border: 4px solid #ff6600;
+        border-radius: 8px;
+        background-color: #feff9d;
+      }
+
+      .btns {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 8px;
+        width: 100%;
+        
+
+      }
+
+      button {
+        box-sizing: border-box;
+        background-color: #fdef05;
+        border-radius: 8px;
+        border: 2px solid #ff6600;
+        font-family: inherit;
+        margin: 0;
+        padding: 10px 20px;
+        width: 60px;
+        height: fit-content;
+      }
+      
+      .btn-internal{
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      button:not(:last-child) {
+        margin-right: 10px;
+      }
+
+      .messages {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        align-items: center;
+        width: 80%;
+        max-width: 460px;
+      }
+
+      p {
+        display: block;
+        margin: 0;
+        width: 100%;
+      }
+
+      @media (max-width: 440px) {
+        /* button {
+            margin-top: 25px;
+        } */
+
+        /* #arriba,
+        #abajo {
+            margin-left: 100%;
+            margin-right: 100%;
+        } */
+      }
+    </style>
+</head>
+<body>
+  
+
+  <div class="game-container">
+    <div class="relative">
+      <div class="hidden lg:inline-block lg:absolute lg:top-0 lg:left-0  lg:-translate-x-full" id="nickname">
+        <span class="text-4xl text-white shadow-2xl">@DECSCODE</span>
+      </div>
+      <canvas id="canvas"></canvas>   
+    </div>
+    
+    <div class="flex justify-center md:text-lg items-center flex-col">
+      <div class="game-messages messages text-center my-2" >
+        <h1 class="text-xl md:text-4xl text-orange-500 text-center mb-1 md:mb-3 ">SKULL GAME</h1>
+        <p>Lives : <span class="text-sm md:text-xl heart"></span></p>
+        <p class="tiempo">Tiempo ⏳: <span class="time"></span> </p>
+        <p>Record 🏁: <span class="record"></span></p>
+      </div>
+
+      <div class="btns">
+        <button class="flex text-xs md:text-base text-black justify-center items-center hover:scale-105 hover:bg-yellow-400 izquierda">
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+        <div class="btn-internal">
+            <button class="flex text-xs md:text-base text-black justify-center items-center hover:scale-105 hover:bg-yellow-400 arriba">
+              <i class="fa-solid fa-arrow-up"></i>
+            </button>
+            <button class="flex text-xs md:text-base text-black justify-center items-center hover:scale-105 hover:bg-yellow-400 abajo">
+              <i class="fa-solid fa-arrow-down"></i>
+            </button>
+        </div>
+        <button class="flex text-xs md:text-base  text-black justify-center items-center hover:scale-105 hover:bg-yellow-400 derecha">
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+    
+    <div class="hidden md:flex text-black flex-col absolute right-0 text-xl justify-center md:text-2xl">
+          
+      <a href="https://github.com/didier9133" target="_blank" class="w-14 h-14 bg-fondo-cremoso hover:bg-primary border-b-2 border-orange-300 flex justify-center items-center">
+        <i class="fa-brands fa-github"></i>
+      </a>
+      <a href="https://twitter.com/didierecs" target="_blank" class="w-14 h-14 bg-fondo-cremoso hover:bg-primary  border-b-2 border-orange-300 flex justify-center items-center">
+        <i class="fa-brands fa-twitter"></i>
+      </a>
+      <a href="https://www.instagram.com/didier9133/" target="_blank" class="w-14 h-14 bg-fondo-cremoso hover:bg-primary  border-b-2 border-orange-300 flex justify-center items-center">
+        <i class="fa-brands fa-instagram"></i>
+      </a>
+      <a href= "https://www.linkedin.com/in/didier-contreras-sanchez-a05537175/" target="_blank" class="w-14 h-14 bg-fondo-cremoso hover:bg-primary  flex justify-center items-center">
+        <i class="fa-brands fa-linkedin"></i>
+      </a>
+     
+    </div>
+
+    <button type="button" id="modalactive" class="hidden" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
+
+    <!-- Modal -->
+    <div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
+    id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog relative w-auto pointer-events-none">
+        <div
+          class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
+          <div
+            class="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
+            <h5 class="text-xl font-medium leading-normal text-orange-500" id="exampleModalLabel">Felicitaciones 🏆🏆</h5>
+          </div>
+          <div class="modal-body relative p-4 text-black text-base font-medium" id="spanTiempos"> 
+            <!-- <span class="block pt-2">
+              tiempo del jugador :<br> 00:00:12:43</span>
+            <span class="block pt-2">
+              tiempo del jugador :<br> 00:00:12:43</span>
+            <span class="inline-block pt-2  text-orange-500">
+               lo sentimos no ha superado el record 😓😓
+            </span>
+            </span> -->
+          </div>
+          <div
+            class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
+            <a href="index.html" type="button" class="px-6
+              py-2.5
+              bg-purple-600
+              text-white
+              font-medium
+              text-xs
+              leading-tight
+              uppercase
+              rounded
+              shadow-md
+              hover:bg-purple-700 hover:shadow-lg
+              focus:bg-purple-700 focus:shadow-lg focus:outline-none focus:ring-0
+              active:bg-purple-800 active:shadow-lg
+              transition
+              duration-150
+              ease-in-out">Close</a>
+      
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <script src="./tw-elements/dist/js/index.min.js"></script>
+  <script src="./maps.js"></script>
+  <script src="./main.js"></script>  
+</body>
+</html>
