@@ -100,16 +100,23 @@ function winGame(){
         }
     }else{
         localStorage.setItem('record_time', timePlayer)
+        `<span class="block pt-2">tiempo del jugador:<br> ${timePlayer}</span><span class="block pt-2  text-orange-500">Crack has logrado tu primer tie,po en el juego 🎉🎉 intenta romperlo!! </span>`
         console.log('nuevo puntaje')
     }
     
-    modal.click()
+    game.clearRect(0,0,canvasSize,canvasSize)
+    for(i=0; i<bombsPositions.x.length; i++){
+        game.fillText(emojis['WIN'],bombsPositions.x[i],bombsPositions.y[i])
+        
+    }
+    setTimeout(modal.click(),400)
 }
 function colision(){
     playerPosition.positionx=doorPosition.positiondoorx
     playerPosition.positiony=doorPosition.positiondoory
     setCanvasSize()
 }
+
 
 
 function setCanvasSize(){ 
@@ -200,12 +207,13 @@ function starGame(){
                     setTimeout(colision,200)
                     // console.log('colision')
                 }else{
-                    game.fillText(emojis['BOMB_COLLISION'],playerPosition.positionx,playerPosition.positiony)
+                    finalexplosion()
+                    // game.fillText(emojis['BOMB_COLLISION'],playerPosition.positionx,playerPosition.positiony)
                     level=0
                     lives=3
                     starTime=undefined
-                    setTimeout(setCanvasSize,200)
-                    setTimeout(moveByKey,200)
+                    setTimeout(setCanvasSize,400)
+                    setTimeout(moveByKey,400)
                 }
               
             }
@@ -213,6 +221,15 @@ function starGame(){
     }
 
     
+}
+
+function finalexplosion(){
+    game.fillText(emojis['BOMB_COLLISION'],playerPosition.positionx,playerPosition.positiony)
+    game.clearRect(0,0,canvasSize,canvasSize)
+    for(i=0; i<bombsPositions.x.length; i++){
+        game.fillText(emojis['GAME_OVER'],bombsPositions.x[i],bombsPositions.y[i])
+        
+    }
 }
 
 function moveUp(){
