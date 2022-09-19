@@ -100,7 +100,8 @@ function winGame(){
         }
     }else{
         localStorage.setItem('record_time', timePlayer)
-        `<span class="block pt-2">tiempo del jugador:<br> ${timePlayer}</span><span class="block pt-2  text-orange-500">Crack has logrado tu primer tie,po en el juego 🎉🎉 intenta romperlo!! </span>`
+        const view= `<span class="block pt-2">tiempo del jugador:<br> ${timePlayer}</span><span class="block pt-2  text-orange-500">Crack has logrado tu primer tie,po en el juego 🎉🎉 intenta romperlo!! </span>`
+        spanRecord.innerHTML=view
         console.log('nuevo puntaje')
     }
     
