@@ -5,8 +5,8 @@ const emojis={
     'I':'🎁',
     'PLAYER':'💀',
     'BOMB_COLLISION':'🔥',
-    'GAME_OVER':'👎',
-    'WIN':'🏆',
+    'GAME_OVER':'😈',
+    'WIN':'💎',
     'HEART':'💖'};
     
     const maps=[];
